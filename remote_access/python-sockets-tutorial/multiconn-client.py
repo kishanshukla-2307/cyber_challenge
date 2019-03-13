@@ -2,8 +2,8 @@
 
 import sys
 import socket
-import selectors
-import types
+import selectors34 as selectors
+from argparse import Namespace
 
 sel = selectors.DefaultSelector()
 messages = [b"Message 1 from client.", b"Message 2 from client."]
@@ -18,7 +18,7 @@ def start_connections(host, port, num_conns):
         sock.setblocking(False)
         sock.connect_ex(server_addr)
         events = selectors.EVENT_READ | selectors.EVENT_WRITE
-        data = types.SimpleNamespace(
+        data = Namespace(
             connid=connid,
             msg_total=sum(len(m) for m in messages),
             recv_total=0,
@@ -52,7 +52,7 @@ def service_connection(key, mask):
 if len(sys.argv) != 4:
     print("usage:", sys.argv[0], "<host> <port> <num_connections>")
     sys.exit(1)
-
+#print(sys.version)
 host, port, num_conns = sys.argv[1:4]
 start_connections(host, int(port), int(num_conns))
 
