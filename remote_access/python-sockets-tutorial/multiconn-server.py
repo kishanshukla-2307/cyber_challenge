@@ -1,9 +1,9 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 
 import sys
 import socket
-import selectors
-import types
+import selectors34 as selectors
+from argparse import Namespace
 
 sel = selectors.DefaultSelector()
 
@@ -12,7 +12,7 @@ def accept_wrapper(sock):
     conn, addr = sock.accept()  # Should be ready to read
     print("accepted connection from", addr)
     conn.setblocking(False)
-    data = types.SimpleNamespace(addr=addr, inb=b"", outb=b"")
+    data = Namespace(addr=addr, inb=b"", outb=b"")
     events = selectors.EVENT_READ | selectors.EVENT_WRITE
     sel.register(conn, events, data=data)
 

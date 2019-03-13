@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 
 import sys
 import socket
@@ -52,7 +52,7 @@ def service_connection(key, mask):
 if len(sys.argv) != 4:
     print("usage:", sys.argv[0], "<host> <port> <num_connections>")
     sys.exit(1)
-#print(sys.version)
+print(sys.version)
 host, port, num_conns = sys.argv[1:4]
 start_connections(host, int(port), int(num_conns))
 
